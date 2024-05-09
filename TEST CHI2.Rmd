@@ -1,0 +1,55 @@
+---
+title: "DEVOIR Rmarkdown"
+author: "Etienne"
+date: "2024-05-06"
+output: html_document
+---
+
+```{r}
+# ENONCE: Afin de tester une solution toxique, on fais des injections a un groupe de 80  escepes animales. on admet que l'injection est mortelle dans 80% des cas . Le fait que 22 souris ne soient pas mortes est il compatible au seuil  de 5 % avec cette hypothèse? #
+
+```
+
+
+```{r}
+# fréquence observé
+
+observé <- c(Vivant=22, morte=80-22) #souris vivantes   souris mortes
+```
+
+
+```{r}
+# fréquence attendue
+Attendue <- c(Vivant=0.2*80, morte=0.8*80)
+```
+
+
+```{r}
+# Tableau de contingence
+
+(tableau_con <- rbind(Attendue, observé))
+
+# vérification de l'utilisation ou non de la correction de Yate
+
+(prop.table(tableau_con)*100)
+```
+
+
+```{r}
+# Pas d'utilisation de la correction de yates car aucune des proportion n'est inferieur à 5%
+
+```
+
+```{r}
+# Application du CHISQ2
+
+ref <- chisq.test(observé , Attendue, correct = F)
+print(ref)
+```
+
+```{r}
+# Conclusion non le fait que les 22 SOURIS NE SOIENT pas morte n'est t'il pas compatible au seuil de 5%, car p=0.15 sup à 0.05: ceci pourrait être dû a des fluctuations d'echantillons ou au hasard.
+
+
+```
+
